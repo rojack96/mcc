@@ -1,6 +1,8 @@
-package mnc
+package nations
 
-var Slovakia = []Mnc{
+import "github.com/rojack96/mcc/models"
+
+var Slovakia = []models.Mnc{
 	{299, "Failed Calls"},
 	{999, "Fix Line"},
 	{6, "O2"},

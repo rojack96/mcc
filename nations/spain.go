@@ -1,6 +1,8 @@
-package mnc
+package nations
 
-var Spain = []Mnc{
+import "github.com/rojack96/mcc/models"
+
+var Spain = []models.Mnc{
 	{299, "ACN"},
 	{299, "Adamo Telecom"},
 	{36, "Alai"},

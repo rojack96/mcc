@@ -1,6 +1,8 @@
-package mnc
+package nations
 
-var Croatia = []Mnc{
+import "github.com/rojack96/mcc/models"
+
+var Croatia = []models.Mnc{
 	{10, "A1 / VIP"},
 	{299, "Failed Calls"},
 	{999, "Fix Line"},

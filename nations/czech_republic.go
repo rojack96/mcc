@@ -1,6 +1,8 @@
-package mnc
+package nations
 
-var CzechRepublic = []Mnc{
+import "github.com/rojack96/mcc/models"
+
+var CzechRepublic = []models.Mnc{
 	{299, "+4U Mobile"},
 	{299, "3ton"},
 	{299, "CEZ"},

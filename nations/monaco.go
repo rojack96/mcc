@@ -1,6 +1,8 @@
-package mnc
+package nations
 
-var Monaco = []Mnc{
+import "github.com/rojack96/mcc/models"
+
+var Monaco = []models.Mnc{
 	{299, "Failed Calls"},
 	{999, "Fix Line"},
 	{1, "Monaco Telecom"},

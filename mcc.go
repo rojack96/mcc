@@ -1,7 +1,9 @@
-package mcc
+package main
 
 import (
 	"errors"
+	"fmt"
+	"strconv"
 
 	"github.com/rojack96/mcc/models"
 	"github.com/rojack96/mcc/nations"
@@ -9,42 +11,59 @@ import (
 
 // Reference for Mcc and Mnc link https://mcc-mnc.com/
 
-// GenerateHni The combination of MCC and MNC is called HNI (Home network identity) and is the combination of both in one string
-// (e.g. MCC= 262 and MNC = 01 results in an HNI of 26201)
-func GenerateHni() {
-	return
-}
-
-func binarySearch(code uint16, mccSlice []models.Mcc) models.Mcc {
-	indexLow := 0
-	indexHigh := len(mccSlice) - 1
-
-	if indexLow > indexHigh {
-		return models.Mcc{}
+func FindByCode(mccCode string) (models.MccResult, error) {
+	mccCodeString, err := strconv.Atoi(mccCode)
+	if err != nil {
+		return models.MccResult{}, err
 	}
 
-	indexMid := (indexLow + indexHigh) / 2
-
-	if code == mccSlice[indexMid].Code {
-		return mccSlice[indexMid]
-	} else if code < mccSlice[indexMid].Code {
-		newSlice := mccSlice[:indexMid-1]
-		return binarySearch(code, newSlice)
-	} else if code > mccSlice[indexMid].Code {
-		newSlice := mccSlice[indexMid+1:]
-		return binarySearch(code, newSlice)
-	}
-
-	return models.Mcc{}
-}
-
-func FindByCode(code uint16) (models.Mcc, error) {
-	result := binarySearch(code, mcc)
-	if result.Code == 0 {
-		return models.Mcc{}, errors.New("mcc not found")
+	result := binarySearchByCode(uint16(mccCodeString), mcc, 0, len(mcc)-1)
+	if result.Code == "" {
+		return models.MccResult{}, errors.New("mcc not found")
 	}
 
 	return result, nil
+}
+
+// HniListByCode The combination of MCC and MNC is called HNI (Home network identity) and is the combination of both in one string
+// (e.g. MCC= 262 and MNC = 01 results in an HNI of 26201)
+func HniListByCode(mccCode string) []string {
+	result := make([]string, 0)
+	mccTemp, err := FindByCode(mccCode)
+	if err != nil {
+		return nil
+	}
+
+	for _, m := range mccTemp.Mnc {
+		result = append(result, mccTemp.Code+m.Code)
+	}
+
+	return result
+}
+
+func binarySearchByCode(target uint16, mccSlice []models.Mcc, lowIdx, highIdx int) models.MccResult {
+	if lowIdx > highIdx {
+		return models.MccResult{}
+	}
+
+	midIdx := (lowIdx + highIdx) / 2
+
+	if target == mccSlice[midIdx].Code {
+		res := mccSlice[midIdx]
+		return models.MccResult{
+			Code:        strconv.Itoa(int(res.Code)),
+			Iso:         res.Iso,
+			Country:     res.Country,
+			CountryCode: res.CountryCode,
+			Mnc:         res.Mnc,
+		}
+	} else if target < mccSlice[midIdx].Code {
+		return binarySearchByCode(target, mccSlice, lowIdx, midIdx-1)
+	} else if target > mccSlice[midIdx].Code {
+		return binarySearchByCode(target, mccSlice, midIdx+1, highIdx)
+	}
+
+	return models.MccResult{}
 }
 
 var mcc = []models.Mcc{
@@ -52,12 +71,12 @@ var mcc = []models.Mcc{
 	/* 204 */ nations.Netherlands,
 	/* 206 */ nations.Belgium,
 	/* 206 */ nations.France,
-	/* 212 */ {Code: 212, Iso: "MC", Country: "Monaco", CountryCode: 377, Mnc: nations.Monaco},
-	/* 213 */ {Code: 213, Iso: "AD", Country: "Andorra", CountryCode: 376, Mnc: nations.Andorra},
-	/* 214 */ {Code: 214, Iso: "ES", Country: "Spain", CountryCode: 34, Mnc: nations.Spain},
-	/* 216 */ {Code: 216, Iso: "HU", Country: "Hungary", CountryCode: 36, Mnc: nations.Hungary},
-	/* 218 */ {Code: 218, Iso: "BA", Country: "Bosnia and Herzegovina", CountryCode: 387, Mnc: nations.BosniaAndHerzegovina},
-	/* 219 */ {Code: 219, Iso: "HR", Country: "Croatia", CountryCode: 385, Mnc: nations.Croatia},
+	/* 212 */ nations.Monaco,
+	/* 213 */ nations.Andorra,
+	/* 214 */ nations.Spain,
+	/* 216 */ nations.Hungary,
+	/* 218 */ nations.BosniaAndHerzegovina,
+	/* 219 */ nations.Croatia,
 	/* 220 */ {Code: 220, Iso: "RS", Country: "Serbia", CountryCode: 381, Mnc: nations.Serbia},
 	/* 221 */ {Code: 221, Iso: "XK", Country: "Kosovo", CountryCode: 383, Mnc: nations.Kosovo},
 	/* 222 */ {Code: 222, Iso: "IT", Country: "Italy", CountryCode: 39, Mnc: nations.Italy},
@@ -284,6 +303,6 @@ var mcc = []models.Mcc{
 	/* 750 */ {Code: 750, Iso: "FK"},
 }
 
-/*func main() {
-	fmt.Println(FindByCode(204))
-}*/
+func main() {
+	fmt.Println(HniListByCode("204"))
+}

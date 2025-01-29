@@ -15,6 +15,8 @@ func NewMccReader() Mcc {
 
 type Reader interface {
 	FindByCode(mccCode string) (models.MccResult, error)
+	MncList(mccCode string) ([]models.Mnc, error)
+	MncMap(mccCode string, groupBy GroupBy) (map[string][]string, error)
 	HniListByCode(mccCode string) []string
 }
 

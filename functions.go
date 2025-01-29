@@ -6,6 +6,13 @@ import (
 	"strconv"
 )
 
+type GroupBy string
+
+const (
+	MncCode GroupBy = "mncCode"
+	Network GroupBy = "network"
+)
+
 func (r *Mcc) FindByCode(mccCode string) (models.MccResult, error) {
 	mccCodeString, err := strconv.Atoi(mccCode)
 	if err != nil {
@@ -15,6 +22,52 @@ func (r *Mcc) FindByCode(mccCode string) (models.MccResult, error) {
 	result := r.binarySearchByCode(uint16(mccCodeString), mcc, 0, len(mcc)-1)
 	if result.Code == "" {
 		return models.MccResult{}, errors.New("mcc not found")
+	}
+
+	return result, nil
+}
+
+func (r *Mcc) MncList(mccCode string) ([]models.Mnc, error) {
+	mccCodeString, err := strconv.Atoi(mccCode)
+	if err != nil {
+		return nil, err
+	}
+
+	result := r.binarySearchByCode(uint16(mccCodeString), mcc, 0, len(mcc)-1)
+	if result.Code == "" {
+		return nil, errors.New("mcc not found")
+	}
+
+	if len(result.Mnc) == 0 {
+		return nil, errors.New("mcc not found")
+	}
+
+	return result.Mnc, nil
+}
+
+func (r *Mcc) MncMap(mccCode string, groupBy GroupBy) (map[string][]string, error) {
+	result := make(map[string][]string)
+
+	list, err := r.MncList(mccCode)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, mnc := range list {
+		var (
+			key, value = mnc.Code, mnc.Network
+		)
+
+		switch groupBy {
+		case MncCode:
+			key = mnc.Code
+			value = mnc.Network
+		case Network:
+			key = mnc.Network
+			value = mnc.Code
+		}
+
+		result[key] = append(result[key], value)
 	}
 
 	return result, nil

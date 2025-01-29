@@ -1,4 +1,4 @@
-package test
+package main
 
 import (
 	"fmt"
@@ -7,6 +7,6 @@ import (
 
 func main() {
 	testone := mcc.NewMccReader()
-	res, _ := testone.FindByCode("204")
+	res, _ := testone.MncMap("222", mcc.MncCode)
 	fmt.Println(res)
 }

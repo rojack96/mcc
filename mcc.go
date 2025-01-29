@@ -1,69 +1,21 @@
-package main
+package mcc
 
 import (
-	"errors"
-	"fmt"
-	"strconv"
-
 	"github.com/rojack96/mcc/models"
 	"github.com/rojack96/mcc/nations"
 )
 
 // Reference for Mcc and Mnc link https://mcc-mnc.com/
 
-func FindByCode(mccCode string) (models.MccResult, error) {
-	mccCodeString, err := strconv.Atoi(mccCode)
-	if err != nil {
-		return models.MccResult{}, err
-	}
+type Mcc struct{}
 
-	result := binarySearchByCode(uint16(mccCodeString), mcc, 0, len(mcc)-1)
-	if result.Code == "" {
-		return models.MccResult{}, errors.New("mcc not found")
-	}
-
-	return result, nil
+func NewMccReader() Mcc {
+	return Mcc{}
 }
 
-// HniListByCode The combination of MCC and MNC is called HNI (Home network identity) and is the combination of both in one string
-// (e.g. MCC= 262 and MNC = 01 results in an HNI of 26201)
-func HniListByCode(mccCode string) []string {
-	result := make([]string, 0)
-	mccTemp, err := FindByCode(mccCode)
-	if err != nil {
-		return nil
-	}
-
-	for _, m := range mccTemp.Mnc {
-		result = append(result, mccTemp.Code+m.Code)
-	}
-
-	return result
-}
-
-func binarySearchByCode(target uint16, mccSlice []models.Mcc, lowIdx, highIdx int) models.MccResult {
-	if lowIdx > highIdx {
-		return models.MccResult{}
-	}
-
-	midIdx := (lowIdx + highIdx) / 2
-
-	if target == mccSlice[midIdx].Code {
-		res := mccSlice[midIdx]
-		return models.MccResult{
-			Code:        strconv.Itoa(int(res.Code)),
-			Iso:         res.Iso,
-			Country:     res.Country,
-			CountryCode: res.CountryCode,
-			Mnc:         res.Mnc,
-		}
-	} else if target < mccSlice[midIdx].Code {
-		return binarySearchByCode(target, mccSlice, lowIdx, midIdx-1)
-	} else if target > mccSlice[midIdx].Code {
-		return binarySearchByCode(target, mccSlice, midIdx+1, highIdx)
-	}
-
-	return models.MccResult{}
+type Reader interface {
+	FindByCode(mccCode string) (models.MccResult, error)
+	HniListByCode(mccCode string) []string
 }
 
 var mcc = []models.Mcc{
@@ -301,8 +253,4 @@ var mcc = []models.Mcc{
 	/* 746 */ {Code: 746, Iso: "SR"},
 	/* 748 */ {Code: 748, Iso: "UY"},
 	/* 750 */ {Code: 750, Iso: "FK"},
-}
-
-func main() {
-	fmt.Println(HniListByCode("204"))
 }

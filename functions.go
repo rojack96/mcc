@@ -16,17 +16,18 @@ const (
 func (r *Mcc) FindByCode(mccCode string) (models.MccResult, error) {
 	mccCodeString, err := strconv.Atoi(mccCode)
 	if err != nil {
-		return models.MccResult{}, err
+		return models.MccResult{}, errors.New("MCC not valid")
 	}
 
 	result := r.binarySearchByCode(uint16(mccCodeString), mcc, 0, len(mcc)-1)
 	if result.Code == "" {
-		return models.MccResult{}, errors.New("mcc not found")
+		return models.MccResult{}, errors.New("MCC not found")
 	}
 
 	return result, nil
 }
 
+// MncList - return a list of MNC of relative MCC
 func (r *Mcc) MncList(mccCode string) ([]models.Mnc, error) {
 	mccCodeString, err := strconv.Atoi(mccCode)
 	if err != nil {
@@ -35,11 +36,11 @@ func (r *Mcc) MncList(mccCode string) ([]models.Mnc, error) {
 
 	result := r.binarySearchByCode(uint16(mccCodeString), mcc, 0, len(mcc)-1)
 	if result.Code == "" {
-		return nil, errors.New("mcc not found")
+		return nil, errors.New("MCC not found")
 	}
 
 	if len(result.Mnc) == 0 {
-		return nil, errors.New("mcc not found")
+		return nil, errors.New("MNC not found")
 	}
 
 	return result.Mnc, nil
@@ -73,7 +74,7 @@ func (r *Mcc) MncMap(mccCode string, groupBy GroupBy) (map[string][]string, erro
 	return result, nil
 }
 
-// HniListByCode The combination of MCC and MNC is called HNI (Home network identity) and is the combination of both in one string
+// HniListByCode - The combination of MCC and MNC is called HNI (Home network identity) and is the combination of both in one string
 // (e.g. MCC= 262 and MNC = 01 results in an HNI of 26201)
 func (r *Mcc) HniListByCode(mccCode string) []string {
 	result := make([]string, 0)
@@ -84,6 +85,23 @@ func (r *Mcc) HniListByCode(mccCode string) []string {
 
 	for _, m := range mccTemp.Mnc {
 		result = append(result, mccTemp.Code+m.Code)
+	}
+
+	return result
+}
+
+// ImsiList - If you combine the HNI with the MSIN (Mobile Subscriber Identification Number)
+// the result is the so called IMSI (integrated mobile subscriber identify).
+func (r *Mcc) ImsiList(mccCode, msin string) []string {
+	result := make([]string, 0)
+	hniList := r.HniListByCode(mccCode)
+
+	if len(hniList) == 0 {
+		return nil
+	}
+
+	for _, h := range hniList {
+		result = append(result, h+msin)
 	}
 
 	return result

@@ -7,6 +7,6 @@ import (
 
 func main() {
 	testone := mcc.NewMccReader()
-	res, _ := testone.MncMap("222", mcc.MncCode)
-	fmt.Println(res)
+	res, err := testone.FindByCode("aa")
+	fmt.Println(res, err)
 }

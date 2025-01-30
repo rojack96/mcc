@@ -18,6 +18,7 @@ type Reader interface {
 	MncList(mccCode string) ([]models.Mnc, error)
 	MncMap(mccCode string, groupBy GroupBy) (map[string][]string, error)
 	HniListByCode(mccCode string) []string
+	ImsiList(mccCode, msin string) []string
 }
 
 var mcc = []models.Mcc{

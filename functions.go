@@ -13,30 +13,47 @@ const (
 	Network GroupBy = "network"
 )
 
-func (r *Mcc) FindByCode(mccCode string) (models.MccResult, error) {
-	mccCodeString, err := strconv.Atoi(mccCode)
+func (r *Mcc) MccInfo(mccCode string) (models.MccResult, error) {
+	result, err := r.findByCode(mccCode)
 	if err != nil {
-		return models.MccResult{}, errors.New("MCC not valid")
-	}
-
-	result := r.binarySearchByCode(uint16(mccCodeString), mcc, 0, len(mcc)-1)
-	if result.Code == "" {
-		return models.MccResult{}, errors.New("MCC not found")
+		return models.MccResult{}, err
 	}
 
 	return result, nil
 }
 
-// MncList - return a list of MNC of relative MCC
-func (r *Mcc) MncList(mccCode string) ([]models.Mnc, error) {
-	mccCodeString, err := strconv.Atoi(mccCode)
+func (r *Mcc) Iso(mccCode string) (string, error) {
+	result, err := r.findByCode(mccCode)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
-	result := r.binarySearchByCode(uint16(mccCodeString), mcc, 0, len(mcc)-1)
-	if result.Code == "" {
-		return nil, errors.New("MCC not found")
+	return result.Iso, nil
+}
+
+func (r *Mcc) Country(mccCode string) (string, error) {
+	result, err := r.findByCode(mccCode)
+	if err != nil {
+		return "", err
+	}
+
+	return result.Country, nil
+}
+
+func (r *Mcc) CountryCode(mccCode string) (uint, error) {
+	result, err := r.findByCode(mccCode)
+	if err != nil {
+		return 0, err
+	}
+
+	return result.CountryCode, nil
+}
+
+// MncList - return a list of MNC of relative MCC
+func (r *Mcc) MncList(mccCode string) ([]models.Mnc, error) {
+	result, err := r.findByCode(mccCode)
+	if err != nil {
+		return nil, err
 	}
 
 	if len(result.Mnc) == 0 {
@@ -78,7 +95,7 @@ func (r *Mcc) MncMap(mccCode string, groupBy GroupBy) (map[string][]string, erro
 // (e.g. MCC= 262 and MNC = 01 results in an HNI of 26201)
 func (r *Mcc) HniListByCode(mccCode string) []string {
 	result := make([]string, 0)
-	mccTemp, err := r.FindByCode(mccCode)
+	mccTemp, err := r.findByCode(mccCode)
 	if err != nil {
 		return nil
 	}
@@ -105,6 +122,20 @@ func (r *Mcc) ImsiList(mccCode, msin string) []string {
 	}
 
 	return result
+}
+
+func (r *Mcc) findByCode(mccCode string) (models.MccResult, error) {
+	mccCodeString, err := strconv.Atoi(mccCode)
+	if err != nil {
+		return models.MccResult{}, errors.New("MCC not valid")
+	}
+
+	result := r.binarySearchByCode(uint16(mccCodeString), mcc, 0, len(mcc)-1)
+	if result.Code == "" {
+		return models.MccResult{}, errors.New("MCC not found")
+	}
+
+	return result, nil
 }
 
 func (r *Mcc) binarySearchByCode(target uint16, mccSlice []models.Mcc, lowIdx, highIdx int) models.MccResult {

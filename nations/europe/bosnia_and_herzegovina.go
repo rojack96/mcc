@@ -1,4 +1,4 @@
-package nations
+package europe
 
 import "github.com/rojack96/mcc/models"
 
@@ -8,10 +8,10 @@ var BosniaAndHerzegovina = models.Mcc{
 	Country:     "Bosnia and Herzegovina",
 	CountryCode: 387,
 	Mnc: []models.Mnc{
-		{"90", "BH Mobile"},
-		{"3", "Eronet"},
-		{"299", "Failed Calls"},
-		{"999", "Fix Line"},
-		{"5", "m:tel"},
+		{Code: "90", Network: "BH Mobile"},
+		{Code: "3", Network: "Eronet"},
+		{Code: "299", Network: "Failed Calls"},
+		{Code: "999", Network: "Fix Line"},
+		{Code: "5", Network: "m:tel"},
 	},
 }

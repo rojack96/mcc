@@ -1,0 +1,43 @@
+package europe
+
+import "github.com/rojack96/mcc/models"
+
+var CzechRepublic = models.Mcc{
+	Code:        230,
+	Iso:         "CZ",
+	Country:     "Czech Republic",
+	CountryCode: 420,
+	Mnc: []models.Mnc{
+		{Code: "299", Network: "+4U Mobile"},
+		{Code: "299", Network: "3ton"},
+		{Code: "299", Network: "CEZ"},
+		{Code: "8", Network: "Compatel"},
+		{Code: "299", Network: "Dragon"},
+		{Code: "299", Network: "EriMobile"},
+		{Code: "299", Network: "Failed Calls"},
+		{Code: "299", Network: "Fayn"},
+		{Code: "999", Network: "Fix Line"},
+		{Code: "299", Network: "GoMobil"},
+		{Code: "299", Network: "ha-loo mobil"},
+		{Code: "299", Network: "Laudatio"},
+		{Code: "299", Network: "METRONET"},
+		{Code: "299", Network: "MOBIL21"},
+		{Code: "299", Network: "Nej Mobil"},
+		{Code: "299", Network: "NETBOX Mobil"},
+		{Code: "4", Network: "Nordic Telecom"},
+		{Code: "2", Network: "O2"},
+		{Code: "299", Network: "Odorik"},
+		{Code: "5", Network: "PODA"},
+		{Code: "299", Network: "SAZKA"},
+		{Code: "98", Network: "SZDC"},
+		{Code: "299", Network: "SZDC"},
+		{Code: "1", Network: "T-Mobile"},
+		{Code: "7", Network: "T-Mobile"},
+		{Code: "299", Network: "Tesco Mobile"},
+		{Code: "299", Network: "TOPefekt"},
+		{Code: "299", Network: "TT Quality"},
+		{Code: "299", Network: "Uniphone"},
+		{Code: "9", Network: "Uniphone"},
+		{Code: "3", Network: "Vodafone"},
+	},
+}

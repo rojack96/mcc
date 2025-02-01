@@ -1,4 +1,4 @@
-package nations
+package europe
 
 import "github.com/rojack96/mcc/models"
 
@@ -7,7 +7,7 @@ var Vatican = models.Mcc{
 	Iso:     "VA",
 	Country: "Vatican",
 	Mnc: []models.Mnc{
-		{"299", "Failed Calls"},
-		{"999", "Fix Line"},
+		{Code: "299", Network: "Failed Calls"},
+		{Code: "999", Network: "Fix Line"},
 	},
 }

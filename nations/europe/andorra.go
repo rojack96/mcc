@@ -1,4 +1,4 @@
-package nations
+package europe
 
 import "github.com/rojack96/mcc/models"
 

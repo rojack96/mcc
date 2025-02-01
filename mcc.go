@@ -2,7 +2,7 @@ package mcc
 
 import (
 	"github.com/rojack96/mcc/models"
-	"github.com/rojack96/mcc/nations"
+	"github.com/rojack96/mcc/nations/europe"
 )
 
 // Reference for Mcc and Mnc link https://mcc-mnc.com/
@@ -22,28 +22,28 @@ type Reader interface {
 }
 
 var mcc = []models.Mcc{
-	/* 202 */ nations.Greece,
-	/* 204 */ nations.Netherlands,
-	/* 206 */ nations.Belgium,
-	/* 206 */ nations.France,
-	/* 212 */ nations.Monaco,
-	/* 213 */ nations.Andorra,
-	/* 214 */ nations.Spain,
-	/* 216 */ nations.Hungary,
-	/* 218 */ nations.BosniaAndHerzegovina,
-	/* 219 */ nations.Croatia,
-	/* 220 */ nations.Serbia,
-	/* 221 */ nations.Kosovo,
-	/* 222 */ nations.Italy,
-	/* 225 */ nations.Vatican,
-	/* 226 */ nations.Romania,
-	/* 228 */ nations.Switzerland,
-	/* 230 */ nations.CzechRepublic,
-	/* 231 */ nations.Slovakia,
-	/* 232 */ nations.Austria,
-	/* 234 */ nations.UnitedKingdom,
+	/* 202 */ europe.Greece,
+	/* 204 */ europe.Netherlands,
+	/* 206 */ europe.Belgium,
+	/* 206 */ europe.France,
+	/* 212 */ europe.Monaco,
+	/* 213 */ europe.Andorra,
+	/* 214 */ europe.Spain,
+	/* 216 */ europe.Hungary,
+	/* 218 */ europe.BosniaAndHerzegovina,
+	/* 219 */ europe.Croatia,
+	/* 220 */ europe.Serbia,
+	/* 221 */ europe.Kosovo,
+	/* 222 */ europe.Italy,
+	/* 225 */ europe.Vatican,
+	/* 226 */ europe.Romania,
+	/* 228 */ europe.Switzerland,
+	/* 230 */ europe.CzechRepublic,
+	/* 231 */ europe.Slovakia,
+	/* 232 */ europe.Austria,
+	/* 234 */ europe.UnitedKingdom,
 	/* 235 */ //{Code: 235, Iso: "GB", Country: "United Kingdom", CountryCode: 44},
-	/* 238 */ nations.Danmark,
+	/* 238 */ europe.Danmark,
 	// TODO continue from here
 	/* 240 */ {Code: 240, Iso: "SE", Country: "Sweden", CountryCode: 46},
 	/* 242 */ {Code: 242, Iso: "NO", Country: "Norway", CountryCode: 47},
@@ -135,8 +135,8 @@ var mcc = []models.Mcc{
 	/* 427 */ {Code: 427, Iso: "QA", Country: "Qatar", CountryCode: 974},
 	/* 428 */ {Code: 428, Iso: "MN", Country: "Mongolia", CountryCode: 976},
 	/* 429 */ {Code: 429, Iso: "NP", Country: "Nepal", CountryCode: 977},
-	/* 430 */ {Code: 430, Iso: "AE"},
-	/* 431 */ {Code: 431, Iso: "AE"},
+	/* 430 */ //{Code: 430, Iso: "AE"},
+	/* 431 */ //{Code: 431, Iso: "AE"},
 	/* 432 */ {Code: 432, Iso: "IR", Country: "Iran", CountryCode: 98},
 	/* 434 */ {Code: 434, Iso: "UZ", Country: "Uzbekistan", CountryCode: 998},
 	/* 436 */ {Code: 436, Iso: "TJ", Country: "Tajikistan", CountryCode: 992},
@@ -145,7 +145,7 @@ var mcc = []models.Mcc{
 	/* 440 */ {Code: 440, Iso: "JP", Country: "Japan", CountryCode: 81},
 	/* 441 */ {Code: 441, Iso: "JP", Country: "Japan", CountryCode: 81},
 	/* 450 */ {Code: 450, Iso: "KR", Country: "South Korea", CountryCode: 82},
-	/* 452 */ {Code: 452, Iso: "VN"},
+	/* 452 */ {Code: 452, Iso: "VN", Country: "Vietnam", CountryCode: 84},
 	/* 454 */ {Code: 454, Iso: "HK"},
 	/* 455 */ {Code: 455, Iso: "MO"},
 	/* 456 */ {Code: 456, Iso: "KH"},

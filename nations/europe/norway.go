@@ -1,0 +1,42 @@
+package europe
+
+import "github.com/rojack96/mcc/models"
+
+var Norway = models.Mcc{
+	Code:        242,
+	Iso:         "NO",
+	Country:     "Norway",
+	CountryCode: 47,
+	Mnc: []models.Mnc{
+		{Code: "22", Network: "Altibox Mobil"},
+		{Code: "21", Network: "BANE NOR"},
+		{Code: "20", Network: "BANE NOR"},
+		{Code: "299", Network: "bigblu"},
+		{Code: "299", Network: "Chilimobil"},
+		{Code: "09", Network: "Com4"},
+		{Code: "15", Network: "eRate"},
+		{Code: "299", Network: "Failed Calls"},
+		{Code: "999", Network: "Fix Line"},
+		{Code: "299", Network: "GlobalConnect"},
+		{Code: "299"},
+		{Code: "14", Network: "ICE"},
+		{Code: "299", Network: "intility"},
+		{Code: "16", Network: "Iristel"},
+		{Code: "299", Network: "JetNett"},
+		{Code: "23", Network: "Lycamobile"},
+		{Code: "05", Network: "Network Norway"},
+		{Code: "299", Network: "NextGenTel"},
+		{Code: "10", Network: "Nkom"},
+		{Code: "299", Network: "Nodnett"},
+		{Code: "06", Network: "ICE"},
+		{Code: "299", Network: "Puzzel"},
+		{Code: "299", Network: "Sierra Wireless"},
+		{Code: "299", Network: "Svea"},
+		{Code: "299", Network: "Telavox"},
+		{Code: "12", Network: "Telenor"},
+		{Code: "01", Network: "Telenor"},
+		{Code: "02", Network: "Telia / NetCom"},
+		{Code: "08", Network: "Telia / NetCom"},
+		{Code: "299", Network: "unifon"},
+	},
+}

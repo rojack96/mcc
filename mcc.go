@@ -81,7 +81,7 @@ var mcc = []models.Mcc{
 	/* 295 */ countries.Liechtenstein,
 	/* 297 */ countries.Montenegro,
 	// TODO continue from here
-	/* 302 */ {Code: 302, Iso: "CA", Country: "Canada", CountryCode: 1},
+	/* 302 */ countries.Canada,
 	/* 308 */ {Code: 308, Iso: "PM", Country: "Saint Pierre and Miquelon", CountryCode: 508},
 	/* 310 */ {Code: 310, Iso: "US", Country: "United States of America", CountryCode: 1},
 	/* 311 */ {Code: 311, Iso: "US", Country: "United States of America", CountryCode: 1},

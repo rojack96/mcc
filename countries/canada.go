@@ -1,0 +1,72 @@
+package countries
+
+import "github.com/rojack96/mcc/models"
+
+// used for repeated names
+const (
+	BellMobility  = "Bell Mobility"
+	FreedomMobile = "Freedom Mobile"
+)
+
+var Canada = models.Mcc{
+	Code:        302,
+	Iso:         "CA",
+	Country:     "Canada",
+	CountryCode: 1,
+	Mnc: []models.Mnc{
+		{Code: "630", Network: BellMobility},
+		{Code: "61", Network: BellMobility},
+		{Code: "660", Network: BellMobility},
+		{Code: "64", Network: BellMobility},
+		{Code: "690", Network: BellMobility},
+		{Code: "69", Network: BellMobility},
+		{Code: "640", Network: BellMobility},
+		{Code: "610", Network: BellMobility},
+		{Code: "66", Network: BellMobility},
+		{Code: "63", Network: BellMobility},
+		{Code: "270", Network: "eastlink"},
+		{Code: "299", Network: "Failed Calls"},
+		{Code: "37", Network: "Fido"},
+		{Code: "370", Network: "Fido"},
+		{Code: "999", Network: "Fix Line"},
+		{Code: "49", Network: FreedomMobile},
+		{Code: "491", Network: FreedomMobile},
+		{Code: "490", Network: FreedomMobile},
+		{Code: "620", Network: "Ice Wireless"},
+		{Code: "62", Network: "Ice Wireless"},
+		{Code: "53", Network: "K-Net Mobile"},
+		{Code: "380", Network: "K-Net Mobile"},
+		{Code: "530", Network: "K-Net Mobile"},
+		{Code: "38", Network: "K-Net Mobile"},
+		{Code: "32", Network: "Rogers"},
+		{Code: "82", Network: "Rogers"},
+		{Code: "320", Network: "Rogers"},
+		{Code: "820", Network: "Rogers"},
+		{Code: "72", Network: "Rogers"},
+		{Code: "720", Network: "Rogers"},
+		{Code: "721", Network: "Rogers"},
+		{Code: "781", Network: "SaskTel Mobility"},
+		{Code: "750", Network: "SaskTel Mobility"},
+		{Code: "75", Network: "SaskTel Mobility"},
+		{Code: "680", Network: "SaskTel Mobility"},
+		{Code: "68", Network: "SaskTel Mobility"},
+		{Code: "78", Network: "SaskTel Mobility"},
+		{Code: "681", Network: "SaskTel Mobility"},
+		{Code: "780", Network: "SaskTel Mobility"},
+		{Code: "760", Network: "Telus Mobility"},
+		{Code: "22", Network: "Telus Mobility"},
+		{Code: "360", Network: "Telus Mobility"},
+		{Code: "221", Network: "Telus Mobility"},
+		{Code: "36", Network: "Telus Mobility"},
+		{Code: "220", Network: "Telus Mobility"},
+		{Code: "860", Network: "Telus Mobility"},
+		{Code: "76", Network: "Telus Mobility"},
+		{Code: "86", Network: "Telus Mobility"},
+		{Code: "50", Network: "Videotron"},
+		{Code: "510", Network: "Videotron"},
+		{Code: "500", Network: "Videotron"},
+		{Code: "520", Network: "Videotron"},
+		{Code: "51", Network: "Videotron"},
+		{Code: "299", Network: "Xplore Mobile"},
+	},
+}

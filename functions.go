@@ -13,6 +13,7 @@ const (
 	Network GroupBy = "network"
 )
 
+// MccInfo returns the full MCC record for the given Mobile Country Code.
 func (r *Mcc) MccInfo(mccCode string) (models.MccResult, error) {
 	result, err := r.findByCode(mccCode)
 	if err != nil {
@@ -22,6 +23,7 @@ func (r *Mcc) MccInfo(mccCode string) (models.MccResult, error) {
 	return result, nil
 }
 
+// Iso returns the ISO country code associated with the given MCC.
 func (r *Mcc) Iso(mccCode string) (string, error) {
 	result, err := r.findByCode(mccCode)
 	if err != nil {
@@ -31,6 +33,7 @@ func (r *Mcc) Iso(mccCode string) (string, error) {
 	return result.Iso, nil
 }
 
+// Country returns the country name associated with the given MCC.
 func (r *Mcc) Country(mccCode string) (string, error) {
 	result, err := r.findByCode(mccCode)
 	if err != nil {
@@ -40,6 +43,7 @@ func (r *Mcc) Country(mccCode string) (string, error) {
 	return result.Country, nil
 }
 
+// CountryCode returns the international calling code associated with the given MCC.
 func (r *Mcc) CountryCode(mccCode string) (uint, error) {
 	result, err := r.findByCode(mccCode)
 	if err != nil {
@@ -63,6 +67,7 @@ func (r *Mcc) MncList(mccCode string) ([]models.Mnc, error) {
 	return result.Mnc, nil
 }
 
+// MncMap returns MNC entries grouped either by MNC code or by network name.
 func (r *Mcc) MncMap(mccCode string, groupBy GroupBy) (map[string][]string, error) {
 	result := make(map[string][]string)
 

@@ -13,17 +13,6 @@ func NewMccReader() Mcc {
 	return Mcc{}
 }
 
-type Reader interface {
-	MccInfo(mccCode string) (models.MccResult, error)
-	Iso(mccCode string) (string, error)
-	Country(mccCode string) (string, error)
-	CountryCode(mccCode string) (uint, error)
-	MncList(mccCode string) ([]models.Mnc, error)
-	MncMap(mccCode string, groupBy GroupBy) (map[string][]string, error)
-	HniListByCode(mccCode string) []string
-	ImsiList(mccCode, msin string) []string
-}
-
 var mcc = []models.Mcc{
 	/* 202 */ countries.Greece,
 	/* 204 */ countries.Netherlands,
